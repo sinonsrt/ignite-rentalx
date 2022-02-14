@@ -10,6 +10,10 @@ class Specification {
     if (!this.id) {
       this.id = uuidv4();
     }
+
+    if (!this.created_at) {
+      this.created_at = new Date();
+    }
   }
 }
 
