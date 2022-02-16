@@ -20,6 +20,8 @@ class CategoriesRepository implements ICategoriesRepository {
     });
 
     this.categories.push(category);
+
+    console.log({ categ: this.categories });
   }
 
   list(): Category[] {

@@ -1,4 +1,4 @@
-import { ISpecificationRepository } from "../modules/cars/repositories/ISpecificationsRepostiry";
+import { ISpecificationRepository } from "../repositories/ISpecificationsRepostiry";
 
 interface IRequest {
   description: string;
