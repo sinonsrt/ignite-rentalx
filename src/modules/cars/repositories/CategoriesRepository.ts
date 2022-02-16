@@ -25,6 +25,8 @@ class CategoriesRepository implements ICategoriesRepository {
   }
 
   list(): Category[] {
+    console.log("entrou");
+    console.log({ cate: this.categories });
     return this.categories;
   }
 
