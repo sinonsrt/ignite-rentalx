@@ -7,5 +7,42 @@
     "contact": {
       "email": "sinonsrt@hotmail.com"
     }
+  },
+  "paths": {
+    "/categories": {
+      "post": {
+        "summary": "Create category",
+        "descripton": "Create a new category",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "description": "Category create for test",
+                  "name": "Category Test"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Category already exists"
+          }
+        }
+      }
+    }
   }
 }
