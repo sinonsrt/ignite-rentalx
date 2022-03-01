@@ -10,7 +10,39 @@
   },
   "paths": {
     "/categories": {
+      "get": {
+        "tags": ["Category"],
+        "summary": "Get categories",
+        "descripton": "Get categories list",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Category already exists"
+          }
+        }
+      },
       "post": {
+        "tags": ["Category"],
         "summary": "Create category",
         "descripton": "Create a new category",
         "requestBody": {
