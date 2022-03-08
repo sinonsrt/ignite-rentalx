@@ -39,3 +39,4 @@ CMD ["npm", "run", "dev"]
 # docker ps - ver containers rodando
 
 
+
