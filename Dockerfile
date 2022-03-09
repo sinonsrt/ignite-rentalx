@@ -34,9 +34,17 @@ CMD ["npm", "run", "dev"]
 # docker exec -it inspiring_lichterman /bin/bash
 
 
-# docker containers - ver containers
+# docker ps -a - ver containers up e down
 # docker images - ver imagens baixadas
 # docker ps - ver containers rodando
 
+## para inciar container
+# docker start nome do container
+
+## ver logs do container
+# docker logs nome do container
+
+## para fica observando os logs do container
+# docker logs nome do container -f
 
 

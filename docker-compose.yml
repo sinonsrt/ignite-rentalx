@@ -16,9 +16,16 @@ services:
 
 
 ## Para executar o docker-compose
-# docker-componse up
+# docker-compose up
 
 ## Para executar o docker-compose em background
-# docker-componse up -d
+# docker-compose up -d
+
+## Para pausar o docker-compose
+# docker-compose stop
+
+## Remover docker-compose
+# docker-compose down
 
 ## Para o hot reload funcionar é nescessário possuir --poll no script de startar a aplicação
+
