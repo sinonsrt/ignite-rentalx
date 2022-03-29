@@ -75,6 +75,73 @@
           }
         }
       }
+    },
+    "/categories/import": {
+      "post": {
+        "tags": ["Category"],
+        "summary": "Upload a specification",
+        "descripton": "Upload a new specification",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Specification already exists"
+          }
+        }
+      }
+    },
+    "/specifications": {
+      "post": {
+        "tags": ["Specification"],
+        "summary": "Create a specification",
+        "descripton": "Create a new specification",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Specifications"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Specification already exists"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Specifications": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "descripton": {
+          "type": "string"
+        }
+      }
     }
   }
 }
