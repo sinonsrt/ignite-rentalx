@@ -18,6 +18,8 @@ const asyncErrors = (
     status: "error",
     message: `Internal server error! ${error.message}`,
   });
+
+  next();
 };
 
 export { asyncErrors };

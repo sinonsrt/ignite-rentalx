@@ -22,15 +22,22 @@ const ensureAuthenticate = async (
   const token = authHeader.split(" ")[1];
 
   try {
-    const { sub } = verify(token, process.env.JWT_SECRET_KET) as IPayload;
+    const { sub: user_id } = verify(
+      token,
+      process.env.JWT_SECRET_KET
+    ) as IPayload;
 
     const usersRepository = new UsersRepository();
 
-    const user = await usersRepository.findById(sub);
+    const user = await usersRepository.findById(user_id);
 
     if (!user) {
       throw new AppError("Invalid user!", 401);
     }
+
+    request.user = {
+      id: user_id,
+    };
 
     next();
   } catch (error) {
