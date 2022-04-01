@@ -32,8 +32,6 @@ describe("Should be able to authenticate user", () => {
       password: user.password,
     });
 
-    console.log({ auth });
-
     expect(auth).toHaveProperty("token");
   });
 
