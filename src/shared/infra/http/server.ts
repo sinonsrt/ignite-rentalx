@@ -3,11 +3,11 @@ import express from "express";
 import swaggerUi from "swagger-ui-express";
 
 import "express-async-errors";
+import swaggerFile from "../../../swagger.json";
 import { asyncErrors } from "./middlewares";
 import { router } from "./routes";
-import swaggerFile from "./swagger.json";
-import "./database";
-import "./shared/container";
+import "@shared/infra/typeorm";
+import "../../container";
 import "dotenv/config";
 
 const app = express();
