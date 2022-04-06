@@ -53,13 +53,13 @@ describe("Create a new car", () => {
 
   it("Should be created a car with available true by default", async () => {
     const car = await createCarUseCase.execute({
-      name: "Car name",
-      description: "Car description",
+      name: "Car available name",
+      description: "Car available description",
       daily_rate: 100,
       license_plate: "ABC-1234",
       fine_amount: 60,
-      brand: "Test Brand",
-      category_id: "category",
+      brand: "Test available brand",
+      category_id: "available category",
     });
 
     expect(car).toHaveProperty("available");
