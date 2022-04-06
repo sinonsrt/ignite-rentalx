@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --poll --inspect --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
-    "test": "jest --watch --runInBand --passWithNoTests --verbose --setupFiles dotenv/config"
+    "lint": "eslint --ignore-path .gitignore --ext .ts . --fix",
+    "test": "jest --watch --runInBand --passWithNoTests --verbose --setupFiles dotenv/config",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@types/swagger-ui-express": "^4.1.3",
@@ -15,14 +17,15 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "express-async-errors": "^3.1.1",
+    "husky": "^7.0.4",
     "jsonwebtoken": "^8.5.1",
     "multer": "^1.4.4",
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",
+    "ts-jest": "^27.1.4",
     "tsyringe": "^4.6.0",
     "typeorm": "^0.2.45",
-    "uuid": "^8.3.2",
-    "ts-jest": "^27.1.4"
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
@@ -32,9 +35,9 @@
     "@types/multer": "^1.4.7",
     "@types/node": "^17.0.21",
     "@types/uuid": "^8.3.4",
-    "@typescript-eslint/eslint-plugin": "^5.10.2",
-    "@typescript-eslint/parser": "^5.10.2",
-    "eslint": "^8.8.0",
+    "@typescript-eslint/eslint-plugin": "^5.18.0",
+    "@typescript-eslint/parser": "^5.18.0",
+    "eslint": "^8.12.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-import-resolver-typescript": "^2.5.0",
