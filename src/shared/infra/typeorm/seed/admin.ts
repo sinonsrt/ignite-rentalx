@@ -15,8 +15,10 @@ const create = async () => {
       values('${id}', 'admin', '${password}', 'admin@rentalx.com.br', true, 'now()', 'XXXXXXX')
     `
   );
+
+  await connection.close();
 };
 
 create().then(() =>
-  console.log("User admin has been successfully created! 👨‍💻")
+  console.log("Admin user has been successfully created! 👨‍💻")
 );
