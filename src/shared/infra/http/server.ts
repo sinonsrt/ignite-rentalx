@@ -6,11 +6,13 @@ import "express-async-errors";
 import swaggerFile from "../../../swagger.json";
 import { asyncErrors } from "./middlewares";
 import { router } from "./routes";
-import "@shared/infra/typeorm";
+import createConnection from "@shared/infra/typeorm";
 import "../../container";
 import "dotenv/config";
 
 const app = express();
+
+createConnection();
 
 app.use(express.json());
 app.use(router);
