@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Liberar a porta 3333, que é a porta que esta aplicação
-EXPOSE 333
+EXPOSE 3333
 
 # Rodar o script na app
 CMD ["npm", "run", "dev"]
