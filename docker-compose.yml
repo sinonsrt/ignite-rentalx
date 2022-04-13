@@ -41,9 +41,8 @@ volumes:
 ## Para executar o docker-compose em background
 # docker-compose up -d
 
-## Para executar o docker-compose e forçar a criaçã do container dnv
+## Para executar o docker-compose e forçar a criação do container dnv
 # docker-compose up --force-recreate 
-
 
 ## Para pausar o docker-compose
 # docker-compose stop
