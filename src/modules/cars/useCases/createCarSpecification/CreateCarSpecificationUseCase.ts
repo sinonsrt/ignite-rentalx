@@ -1,8 +1,9 @@
 import { ICreateCarSpecificationDTO } from "@modules/cars/dtos/ICreateCarSpecificationDTO";
 import { ICarsRepository } from "@modules/cars/repositories/ICarsRepository";
 import { AppError } from "@shared/errors/AppError";
-import { inject } from "tsyringe";
+// import { inject, injectable } from "tsyringe";
 
+// @injectable()
 class CreateCarSpecificationUseCase {
   constructor(
     // @inject("CarsRepository")
@@ -11,8 +12,8 @@ class CreateCarSpecificationUseCase {
 
   async execute({
     car_id,
-    specifications_id,
-  }: ICreateCarSpecificationDTO): Promise<void> {
+  }: // specifications_id,
+  ICreateCarSpecificationDTO): Promise<void> {
     const carExists = await this.carsRepository.findById(car_id);
 
     if (!carExists) {
