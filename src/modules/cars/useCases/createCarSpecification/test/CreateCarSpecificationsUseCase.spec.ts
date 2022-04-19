@@ -1,15 +1,15 @@
 import { CarsRepositoryInMemory } from "@modules/cars/repositories/in-memory/CarsRepositoryInMemory";
-import { SpecificationRepositoryInMemory } from "@modules/cars/repositories/in-memory/SpecificationRepositoryInMemory";
+import { SpecificationsRepositoryInMemory } from "@modules/cars/repositories/in-memory/SpecificationsRepositoryInMemory";
 import { AppError } from "@shared/errors/AppError";
-import { CreateCarSpecificationUseCase } from "../CreateCarSpecificationUseCase";
+import { CreateCarSpecificationUseCase } from "../CreateCarSpecificationsUseCase";
 
 let carsRepositoryInMemory: CarsRepositoryInMemory;
-let specificationsRepositoryInMemory: SpecificationRepositoryInMemory;
+let specificationsRepositoryInMemory: SpecificationsRepositoryInMemory;
 let createCarSpecificationUseCase: CreateCarSpecificationUseCase;
 describe("Create cas specification", () => {
   beforeEach(() => {
     carsRepositoryInMemory = new CarsRepositoryInMemory();
-    specificationsRepositoryInMemory = new SpecificationRepositoryInMemory();
+    specificationsRepositoryInMemory = new SpecificationsRepositoryInMemory();
 
     createCarSpecificationUseCase = new CreateCarSpecificationUseCase(
       carsRepositoryInMemory,
@@ -19,12 +19,12 @@ describe("Create cas specification", () => {
 
   it("Should not be able to add a new specification to a car", async () => {
     const car_id = "123";
-    const specifications_ids = ["5"];
+    const specifications_id = ["5"];
 
     expect(async () => {
       await createCarSpecificationUseCase.execute({
         car_id,
-        specifications_ids,
+        specifications_id,
       });
     }).rejects.toBeInstanceOf(AppError);
   });
@@ -40,11 +40,20 @@ describe("Create cas specification", () => {
       category_id: "available category",
     });
 
-    const specifications_ids = ["5"];
-
-    await createCarSpecificationUseCase.execute({
-      car_id: car.id,
-      specifications_ids,
+    const specification = await specificationsRepositoryInMemory.create({
+      description: "test",
+      name: "test",
     });
+
+    const specifications_id = [specification.id];
+
+    const specificationsCars = await createCarSpecificationUseCase.execute({
+      car_id: car.id,
+      specifications_id,
+    });
+
+    expect(typeof specificationsCars).toBe("object");
+    expect(specificationsCars).toHaveProperty("specifications");
+    expect(specificationsCars.specifications.length).toBe(1);
   });
 });

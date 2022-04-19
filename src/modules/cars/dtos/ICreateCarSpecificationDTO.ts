@@ -1,6 +1,6 @@
 interface ICreateCarSpecificationDTO {
   car_id: string;
-  specifications_ids: string[];
+  specifications_id: string[];
 }
 
 export { ICreateCarSpecificationDTO };
