@@ -1,14 +1,22 @@
 import { RentalsRepositoryInMemory } from "@modules/rentals/repositories/in-memory/RentalsRepositoryInMemory";
 import { AppError } from "@shared/errors/AppError";
 import { CreateRentalUseCase } from "../CreateRentalUseCase";
+import dayjs from "dayjs";
 
 let createRentalUseCase: CreateRentalUseCase;
 let rentalsRepositoryInMemory: RentalsRepositoryInMemory;
+const dayAdd24Hours = dayjs().add(1, "day").toDate();
+
+const rentalDateMock = {
+  user_id: "1234245",
+  car_id: "1234524 ",
+  expected_date: new Date(),
+};
 
 const rentalMock = {
   user_id: "1234245",
   car_id: "1234524 ",
-  expected_date: new Date(),
+  expected_date: dayAdd24Hours,
 };
 
 describe("Create rental", () => {
@@ -33,10 +41,8 @@ describe("Create rental", () => {
   });
 
   it("Should not be able to create a new rental if the user has any rent", async () => {
-    await createRentalUseCase.execute(rentalMock);
-
     expect(async () => {
-      await createRentalUseCase.execute(rentalMock);
+      await createRentalUseCase.execute(rentalDateMock);
     }).rejects.toBeInstanceOf(AppError);
   });
 });
