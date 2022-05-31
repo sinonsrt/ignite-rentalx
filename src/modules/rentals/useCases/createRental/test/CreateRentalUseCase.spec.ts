@@ -22,6 +22,12 @@ const rentalMock = {
   expected_date: dayAdd24Hours,
 };
 
+const rentalCarMock = {
+  user_id: "1234245",
+  car_id: "1234524 ",
+  expected_date: dayjs().toDate(),
+};
+
 describe("Create rental", () => {
   beforeEach(() => {
     rentalsRepositoryInMemory = new RentalsRepositoryInMemory();
@@ -43,7 +49,7 @@ describe("Create rental", () => {
     await createRentalUseCase.execute(rentalMock);
 
     expect(async () => {
-      await createRentalUseCase.execute(rentalMock);
+      await createRentalUseCase.execute(rentalCarMock);
     }).rejects.toBeInstanceOf(AppError);
   });
 
