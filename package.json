@@ -7,7 +7,7 @@
     "dev": "ts-node-dev -r tsconfig-paths/register --poll --inspect --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
     "seed:admin": "ts-node-dev src/shared/infra/typeorm/seed/admin.ts",
-    "test": "cross-env NODE_ENV=test jest --runInBand --passWithNoTests --verbose --setupFiles dotenv/config",
+    "test": "cross-env NODE_ENV=test jest --runInBand --detectOpenHandles --verbose --setupFiles dotenv/config",
     "test:watch": "cross-env NODE_ENV=test jest --runInBand --detectOpenHandles --verbose --setupFiles dotenv/config",
     "prepare": "husky install",
     "lint": "eslint --ignore-path .gitignore --ext .ts . --fix"
