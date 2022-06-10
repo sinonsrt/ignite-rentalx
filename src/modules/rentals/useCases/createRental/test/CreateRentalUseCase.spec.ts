@@ -18,12 +18,6 @@ const rentalDateMock = {
   expected_date: new Date(),
 };
 
-const rentalMock = {
-  user_id: "1234245",
-  car_id: "1234524 ",
-  expected_date: dayAdd24Hours,
-};
-
 const rentalCarMock = {
   user_id: "1234245",
   car_id: "1234524 ",
@@ -43,14 +37,42 @@ describe("Create rental", () => {
   });
 
   it("Should be able to create a new rental", async () => {
-    const rental = await createRentalUseCase.execute(rentalMock);
+    const car = await carsRepositoryInMemory.create({
+      name: "Test",
+      description: "Car Test",
+      daily_rate: 100,
+      license_plate: "test",
+      fine_amount: 40,
+      category_id: "1234",
+      brand: "brand",
+    });
+
+    const rental = await createRentalUseCase.execute({
+      user_id: "12345",
+      car_id: car.id,
+      expected_date: dayAdd24Hours,
+    });
 
     expect(rental).toHaveProperty("id");
     expect(rental).toHaveProperty("start_date");
   });
 
   it("Should not be able to create a new rental if the car is already rent", async () => {
-    await createRentalUseCase.execute(rentalMock);
+    const car = await carsRepositoryInMemory.create({
+      name: "Test",
+      description: "Car Test",
+      daily_rate: 100,
+      license_plate: "test",
+      fine_amount: 40,
+      category_id: "1234",
+      brand: "brand",
+    });
+
+    await createRentalUseCase.execute({
+      user_id: "12345",
+      car_id: car.id,
+      expected_date: dayAdd24Hours,
+    });
 
     expect(async () => {
       await createRentalUseCase.execute(rentalCarMock);

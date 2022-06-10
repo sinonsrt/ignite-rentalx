@@ -12,7 +12,7 @@ import "dotenv/config";
 
 const app = express();
 
-createConnection();
+createConnection(process.env.DATABASE_NAME);
 
 app.use(express.json());
 app.use(router);
