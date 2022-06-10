@@ -17,7 +17,7 @@ class DevolutionRentalUseCase {
     private carsRepository: ICarsRepository
   ) {}
 
-  async execute({ id, user_id }: IDevolutionRentalDTO): Promise<Rental> {
+  async execute({ id }: IDevolutionRentalDTO): Promise<Rental> {
     const rental = await this.rentalsRepository.findById(id);
     const car = await this.carsRepository.findById(id);
     const minimumDaily = 1;
