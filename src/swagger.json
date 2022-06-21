@@ -86,6 +86,11 @@
         "tags": ["Category"],
         "summary": "Upload a specification",
         "description": "Upload a new specification",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -116,6 +121,11 @@
         "tags": ["Specification"],
         "summary": "Create a specification",
         "description": "Create a new specification",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -166,6 +176,35 @@
           }
         }
       }
+    },
+    "/cars": {
+      "post": {
+        "tags": ["Cars"],
+        "summary": "Create Car",
+        "description": "Create car",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Cars"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create"
+          },
+          "400": {
+            "description": "Car already exists!"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -176,6 +215,32 @@
           "type": "string"
         },
         "description": {
+          "type": "string"
+        }
+      }
+    },
+    "Cars": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "daily_rate": {
+          "type": "number"
+        },
+        "license_plate": {
+          "type": "string"
+        },
+        "fine_amout": {
+          "type": "number"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "category_id": {
           "type": "string"
         }
       }
