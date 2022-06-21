@@ -13,7 +13,7 @@
       "get": {
         "tags": ["Category"],
         "summary": "Get categories",
-        "descripton": "Get categories list",
+        "description": "Get categories list",
         "responses": {
           "200": {
             "description": "Success",
@@ -44,7 +44,12 @@
       "post": {
         "tags": ["Category"],
         "summary": "Create category",
-        "descripton": "Create a new category",
+        "description": "Create a new category",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -80,7 +85,7 @@
       "post": {
         "tags": ["Category"],
         "summary": "Upload a specification",
-        "descripton": "Upload a new specification",
+        "description": "Upload a new specification",
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -110,7 +115,7 @@
       "post": {
         "tags": ["Specification"],
         "summary": "Create a specification",
-        "descripton": "Create a new specification",
+        "description": "Create a new specification",
         "requestBody": {
           "content": {
             "application/json": {
@@ -129,6 +134,38 @@
           }
         }
       }
+    },
+    "/sessions": {
+      "post": {
+        "tags": ["Session"],
+        "summary": "Authentication user",
+        "description": "Authentication user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Email or passowrd incorrect!"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -138,9 +175,18 @@
         "name": {
           "type": "string"
         },
-        "descripton": {
+        "description": {
           "type": "string"
         }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
