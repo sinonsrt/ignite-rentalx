@@ -18,12 +18,6 @@ const rentalDateMock = {
   expected_date: new Date(),
 };
 
-const rentalCarMock = {
-  user_id: "1234245",
-  car_id: "1234524 ",
-  expected_date: dayjs().toDate(),
-};
-
 describe("Create rental", () => {
   beforeEach(() => {
     rentalsRepositoryInMemory = new RentalsRepositoryInMemory();
@@ -74,14 +68,22 @@ describe("Create rental", () => {
       expected_date: dayAdd24Hours,
     });
 
-    expect(async () => {
-      await createRentalUseCase.execute(rentalCarMock);
-    }).rejects.toBeInstanceOf(AppError);
+    const alreadyRentCar = createRentalUseCase.execute({
+      user_id: "12345",
+      car_id: car.id,
+      expected_date: dayjs().toDate(),
+    });
+
+    await expect(alreadyRentCar).rejects.toEqual(
+      new AppError("Car is unavailable!")
+    );
   });
 
   it("Should not be able to create a new rental if the user has any rent", async () => {
-    expect(async () => {
-      await createRentalUseCase.execute(rentalDateMock);
-    }).rejects.toBeInstanceOf(AppError);
+    const createRental = createRentalUseCase.execute(rentalDateMock);
+
+    await expect(createRental).rejects.toEqual(
+      new AppError("Invalid return time!")
+    );
   });
 });

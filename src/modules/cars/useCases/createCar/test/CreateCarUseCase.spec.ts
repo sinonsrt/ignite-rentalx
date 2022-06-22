@@ -38,17 +38,19 @@ describe("Create a new car", () => {
       category_id: "category",
     });
 
-    expect(async () => {
-      await createCarUseCase.execute({
-        name: "Car 2 name",
-        description: "Car 2 description",
-        daily_rate: 100,
-        license_plate: "ABC-1234",
-        fine_amount: 60,
-        brand: "Test Brand",
-        category_id: "category",
-      });
-    }).rejects.toBeInstanceOf(AppError);
+    const createdCar = createCarUseCase.execute({
+      name: "Car 2 name",
+      description: "Car 2 description",
+      daily_rate: 100,
+      license_plate: "ABC-1234",
+      fine_amount: 60,
+      brand: "Test Brand",
+      category_id: "category",
+    });
+
+    await expect(createdCar).rejects.toEqual(
+      new AppError("Car already exists")
+    );
   });
 
   it("Should be created a car with available true by default", async () => {

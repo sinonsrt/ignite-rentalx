@@ -28,9 +28,12 @@ describe("Create category", () => {
   });
 
   it("Should not be able to create a new duplicate category", async () => {
-    expect(async () => {
-      await createCategoryUseCase.execute(categoryMock);
-      await createCategoryUseCase.execute(categoryMock);
-    }).rejects.toBeInstanceOf(AppError);
+    await createCategoryUseCase.execute(categoryMock);
+
+    const createCategory = createCategoryUseCase.execute(categoryMock);
+
+    await expect(createCategory).rejects.toEqual(
+      new AppError("Category already exists!")
+    );
   });
 });
