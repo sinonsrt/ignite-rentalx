@@ -33,11 +33,11 @@ class AuthenticateUserUseCase {
     });
 
     return {
+      token,
       user: {
         name: user.name,
         email: user.email,
       },
-      token,
     };
   }
 }
