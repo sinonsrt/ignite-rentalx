@@ -9,6 +9,7 @@ import { router } from "./routes";
 import createConnection from "@shared/infra/typeorm";
 import "../../container";
 import "dotenv/config";
+import "@config/auth";
 
 const app = express();
 

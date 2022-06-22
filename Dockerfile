@@ -7,6 +7,8 @@ WORKDIR /usr/app
 # Copiar o arquivo de -> para
 COPY package.json ./
 
+RUN curl -v https://registry.npmjs.com/
+
 # Depois de tudo, realizar a instalação das dependencias
 RUN npm install
 

@@ -4,11 +4,12 @@ interface IRequest {
 }
 
 interface IResponse {
+  token: string;
+  refresh_token: string;
   user: {
     name: string;
     email: string;
   };
-  token: string;
 }
 
 export { IRequest, IResponse };
