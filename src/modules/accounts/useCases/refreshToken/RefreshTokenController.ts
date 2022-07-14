@@ -1,0 +1,3 @@
+class RefreshTokenController {}
+
+export { RefreshTokenController };
