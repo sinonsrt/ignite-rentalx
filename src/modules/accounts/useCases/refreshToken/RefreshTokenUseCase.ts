@@ -1,7 +1,7 @@
 import { IUsersTokensRepository } from "@modules/accounts/repositories/IUsersTokensRepository";
 import { AppError } from "@shared/errors/AppError";
 import { sign, verify } from "jsonwebtoken";
-import { inject } from "tsyringe";
+import { inject, injectable } from "tsyringe";
 import auth from "@config/auth";
 import { DayjsDateProvider } from "@shared/container/providers/DateProvider/implementations/DayjsDateProvider";
 
@@ -9,6 +9,8 @@ interface IPayload {
   email: string;
   sub: string;
 }
+
+@injectable()
 class RefreshTokenUseCase {
   constructor(
     @inject("UsersTokensRepository")
@@ -20,8 +22,9 @@ class RefreshTokenUseCase {
   async execute(token: string) {
     const { sub, email } = verify(
       token,
-      process.env.JWT_SECRET_KET
+      process.env.JWT_SECRET_REFRESH_KEY
     ) as IPayload;
+
     const user_id = sub;
 
     const userToken =
