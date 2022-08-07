@@ -6,6 +6,7 @@ import { AppError } from "@shared/errors/AppError";
 import { inject, injectable } from "tsyringe";
 import { v4 as uuidv4 } from "uuid";
 import auth from "../../../../config/auth";
+import { resolve } from "path";
 
 @injectable()
 class SendForgotPasswordMailUseCase {
@@ -23,6 +24,15 @@ class SendForgotPasswordMailUseCase {
   async execute(email: string) {
     const user = await this.usersRepository.findByEmail(email);
 
+    const templatePath = resolve(
+      __dirname,
+      "..",
+      "..",
+      "views",
+      "emails",
+      "forgotPassword.hbs"
+    );
+
     if (!user) {
       throw new AppError("User does not exists!");
     }
@@ -37,10 +47,16 @@ class SendForgotPasswordMailUseCase {
       ),
     });
 
+    const variables = {
+      name: user.name,
+      link: `${process.env.FORGOT_MAIL_URL}${token}`,
+    };
+
     await this.mailProvider.sendMail(
       email,
       "Forgot my password",
-      `The reset link is ${token}`
+      variables,
+      templatePath
     );
   }
 }
