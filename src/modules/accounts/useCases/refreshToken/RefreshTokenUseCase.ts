@@ -4,6 +4,7 @@ import { sign, verify } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
 import auth from "@config/auth";
 import { DayjsDateProvider } from "@shared/container/providers/DateProvider/implementations/DayjsDateProvider";
+import { ITokenResponse } from "@modules/accounts/dtos/ITokenDTO";
 
 interface IPayload {
   email: string;
@@ -19,7 +20,7 @@ class RefreshTokenUseCase {
     private dayjsDateProvider: DayjsDateProvider
   ) {}
 
-  async execute(token: string) {
+  async execute(token: string): Promise<ITokenResponse> {
     const { sub, email } = verify(
       token,
       process.env.JWT_SECRET_REFRESH_KEY
@@ -54,7 +55,15 @@ class RefreshTokenUseCase {
       user_id,
     });
 
-    return refresh_token;
+    const newToken = sign({}, process.env.JWT_SECRET_KEY, {
+      subject: user_id,
+      expiresIn: auth.expires_in_token,
+    });
+
+    return {
+      token: newToken,
+      refresh_token,
+    };
   }
 }
 
