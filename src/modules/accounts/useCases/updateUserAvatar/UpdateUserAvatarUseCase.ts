@@ -10,7 +10,7 @@ class UpdateUserAvatarUseCase {
   constructor(
     @inject("UsersRepository")
     private usersRepository: IUsersRepository,
-    @inject("StorageProvier")
+    @inject("StorageProvider")
     private storageProvider: IStorageProvider
   ) {}
 
