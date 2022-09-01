@@ -1,3 +1,4 @@
+import { Expose } from "class-transformer";
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 import { v4 as uuidv4 } from "uuid";
 
@@ -26,6 +27,20 @@ class User {
 
   @CreateDateColumn()
   created_at: Date;
+
+  @Expose({ name: "avatar_url" })
+  getAvatarUrl(): string {
+    switch (process.env.disk) {
+      case "local":
+        return "";
+        break;
+      case "s3":
+        return "";
+        break;
+      default:
+        return null;
+    }
+  }
 
   constructor() {
     if (!this.id) {

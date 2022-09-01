@@ -1,3 +1,4 @@
+import { UserProfileController } from "@modules/accounts/useCases/userProfile/UserProfileController";
 import { Router } from "express";
 import multer from "multer";
 
@@ -12,8 +13,10 @@ const uploadAvatar = multer(uploadConfig);
 
 const createUserController = new CreateUserController();
 const updateUserAvatarController = new UpdateUserAvatarController();
+const userProfileController = new UserProfileController();
 
 usersRoutes.post("/", createUserController.handle);
+usersRoutes.get("/profile", ensureAuthenticate, userProfileController.handle);
 
 usersRoutes.patch(
   "/avatar",
