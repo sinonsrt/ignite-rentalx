@@ -29,13 +29,13 @@ class User {
   created_at: Date;
 
   @Expose({ name: "avatar_url" })
-  getAvatarUrl(): string {
-    switch (process.env.disk) {
+  avatar_url(): string {
+    switch (process.env.DISK) {
       case "local":
-        return "";
+        return `${process.env.APP_API_URL}/avatar/${this.avatar}`;
         break;
       case "s3":
-        return "";
+        return `${process.env.AWS_BUCKET_URL}/avatar/${this.avatar}`;
         break;
       default:
         return null;
